@@ -1,0 +1,54 @@
+<!--gksudo nautilus-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Udawalawa Elephants</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style/style.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style/colour.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style/image_viewer.css')}}"/>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div id="logo">
+  <h1>Udawalawa Elephants</h1>
+  <a href="/logout" class="logout_btn">Logout</a>
+</div>
+
+<div id="site_conten">
+  <div id="content">
+    <div id="Identify_elephant">
+      {% if user %}
+      <h2>Hello {{user}}</h2>
+      <h1 id="find_elephant">Find Elephants<span class="sub">[select the images and click predict button]</span></h1>
+      <!--<form action = "darkflow/test.php" method = "POST" enctype = "multipart/form-data">-->
+      <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <strong>Files:</strong><br>
+        <input id="file-picker" type="file" name="file" accept="image/*" multiple>
+        <input type="submit" value="Predict!" id="upload-button">
+      </form>
+      {% else %}
+      <h2>Please Login</h2>
+      {% endif %}
+      <img id="selected-image" src="" style="height:650px; width = 550px;">
+   </div>
+
+   <div id="all_elephants">
+     <h1 id="all_elephants_topic">Elephants in Udawalawa (01.01.2007)<span class="sub">[hover over thumbnails to view]</span></h1>
+         {%for fullset_img_name in full_set%}
+         <div id="gallery">
+           <em id="thumbs">
+             <a href="#nogo"><img src={{"static/images/samples/"+fullset_img_name}} alt="" /></a>
+             <div id="ele_name">{{fullset_img_name[:-4]}}</div>
+           </em>
+         </div>
+         {% endfor %}
+   </div>
+  </div>
+  <div>
+</div>
+
+</body>
+</html>

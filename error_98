@@ -1,0 +1,7 @@
+ps -fA | grep python
+
+kill -9 pid'
+
+pip3 freeze
+
+https://www.youtube.com/watch?v=vGphzPLemZE
